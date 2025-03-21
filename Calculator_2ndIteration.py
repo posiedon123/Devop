@@ -33,7 +33,7 @@ e.grid(row=0, column=0, columnspan=4, pady=10)
 
 button_params = {"padx": 20, "pady": 20, "fg": "white", "bg": "black", "font": ("Arial", 14)}
 
-# Creating buttons
+# Creating buttons ()
 buttons = [
     Button(root, text="7", **button_params, command=lambda: button_click(7)),
     Button(root, text="8", **button_params, command=lambda: button_click(8)),
@@ -55,7 +55,7 @@ buttons = [
     Button(root, text="<", **button_params, command=lambda: button_operator("<")),
 ]
 
-# Placing buttons on a grid
+# Placing buttons on a grid 
 row = 1
 col = 0
 for button in buttons:
