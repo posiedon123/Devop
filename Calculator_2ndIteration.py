@@ -75,3 +75,4 @@ for i in range(6):
     root.grid_rowconfigure(i, weight=1)
 
 root.mainloop()
+#End of project
