@@ -30,12 +30,36 @@ def button_percentage():  # **New function for percentage calculation**
     except:
         e.delete(0, END)
         e.insert(0, "Error")
+def button_pi():  
+    e.insert(END, str(math.pi))  # **Insert value of Pi**
+
+def button_e():  
+    e.insert(END, str(math.e))  # **Insert Euler's number**
+
+def button_square():  
+    try:
+        value = float(e.get()) ** 2
+        e.delete(0, END)
+        e.insert(0, str(value))
+    except:
+        e.delete(0, END)
+        e.insert(0, "Error")
+
+def button_sqrt():  
+    try:
+        value = math.sqrt(float(e.get()))
+        e.delete(0, END)
+        e.insert(0, str(value))
+    except:
+        e.delete(0, END)
+        e.insert(0, "Error")
+
 
 
 root = Tk()
 root.title("Calculator")
 root.configure(bg="black")
-root.geometry("300x500")  # **Adjusted size to fit new buttons**
+root.geometry("350x600")  # **Adjusted size to fit new buttons**
 
 e = Entry(root, width=16, borderwidth=5, fg="white", bg="black", font=("Arial", 18), justify="right")
 e.grid(row=0, column=0, columnspan=4, pady=10)
@@ -64,6 +88,12 @@ buttons = [
     Button(root, text="<", **button_params, command=lambda: button_operator("<")),
     Button(root, text=".", **button_params, command=lambda: button_click(".")),  # **Decimal button**
     Button(root, text="%", **button_params, command=button_percentage),  # **Percentage button**
+    Button(root, text="π", **button_params, command=button_pi),  # **Pi button**
+    Button(root, text="e", **button_params, command=button_e),  # **Euler's number button**
+
+    Button(root, text="x²", **button_params, command=button_square),  # **Square button**
+    Button(root, text="√x", **button_params, command=button_sqrt),  # **Square root button**
+
 
 ]
 
@@ -78,13 +108,14 @@ for button in buttons:
         row += 1
 
 # Add "Science Calc Coming Soon" label
-Label(root, text="Science Calc Coming Soon", bg="black", fg="white", font=("Arial", 12)).grid(row=6, column=0, columnspan=4, pady=10)
+Label(root, text="Science Calc Coming Soon", bg="black", fg="white", font=("Arial", 12)).grid(row=9, column=0, columnspan=4, pady=10)
 
 # Adjust grid weights to remove spaces between buttons
 for i in range(4):
     root.grid_columnconfigure(i, weight=1)
-for i in range(7):  # **Increased to fit new row for extra buttons**
+for i in range(9):  # **Increased row count for extra buttons**
     root.grid_rowconfigure(i, weight=1)
+
 
 
 root.mainloop()
