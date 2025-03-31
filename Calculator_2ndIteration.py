@@ -1,4 +1,5 @@
 from tkinter import *
+import math
 
 def button_click(number):
     current = e.get()
