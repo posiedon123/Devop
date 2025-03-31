@@ -22,11 +22,20 @@ def button_equal():
     except:
         e.delete(0, END)
         e.insert(0, "Error")
+def button_percentage():  # **New function for percentage calculation**
+    try:
+        value = float(e.get()) / 100
+        e.delete(0, END)
+        e.insert(0, str(value))
+    except:
+        e.delete(0, END)
+        e.insert(0, "Error")
+
 
 root = Tk()
 root.title("Calculator")
 root.configure(bg="black")
-root.geometry("300x450")  # Adjusted size for new buttons
+root.geometry("300x500")  # **Adjusted size to fit new buttons**
 
 e = Entry(root, width=16, borderwidth=5, fg="white", bg="black", font=("Arial", 18), justify="right")
 e.grid(row=0, column=0, columnspan=4, pady=10)
@@ -53,6 +62,9 @@ buttons = [
     Button(root, text="+", **button_params, command=lambda: button_operator("+")),
     Button(root, text=">", **button_params, command=lambda: button_operator(">")),
     Button(root, text="<", **button_params, command=lambda: button_operator("<")),
+    Button(root, text=".", **button_params, command=lambda: button_click(".")),  # **Decimal button**
+    Button(root, text="%", **button_params, command=button_percentage),  # **Percentage button**
+
 ]
 
 # Placing buttons on a grid 
@@ -71,8 +83,9 @@ Label(root, text="Science Calc Coming Soon", bg="black", fg="white", font=("Aria
 # Adjust grid weights to remove spaces between buttons
 for i in range(4):
     root.grid_columnconfigure(i, weight=1)
-for i in range(6):
+for i in range(7):  # **Increased to fit new row for extra buttons**
     root.grid_rowconfigure(i, weight=1)
+
 
 root.mainloop()
 #End of project
