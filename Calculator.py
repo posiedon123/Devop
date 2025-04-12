@@ -1,5 +1,3 @@
-# Project: Calculator (1st Iteration)
-
 # Creating A Calculator
 from tkinter import *
 def button_click(number):
