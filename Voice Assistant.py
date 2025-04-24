@@ -52,20 +52,22 @@ def sendEmail(to, content):
     server.starttls()
     server.login('youremail@gmail.com', 'your-password')
     server.sendmail('youremail@gmail.com', to, content)
-    server.close()
+    server.quit() #Changed .close() to .quit()
 
 if __name__ == "__main__":
     wishMe()
-    while True:
-    # if 1:
+
+    while True:  # ✅ Fixed indentation
         query = takeCommand().lower()
+
+        if query == "none":  # ✅ Error handling for unrecognized input
+            continue
 
         if 'wikipedia' in query:
             speak('Searching Wikipedia...')
             query = query.replace("wikipedia", "")
             results = wikipedia.summary(query, sentences=2)
             speak("According to Wikipedia")
-            print(results)
             speak(results)
 
         elif 'open youtube' in query:
@@ -74,14 +76,13 @@ if __name__ == "__main__":
         elif 'open google' in query:
             webbrowser.open("google.com")
 
-        elif 'open stackoverflow' in query:
-            webbrowser.open("stackoverflow.com")
-
         elif 'play music' in query:
             music_dir = 'D:\\Non Critical\\songs\\Favorite Songs2'
-            songs = os.listdir(music_dir)
-            print(songs)
-            os.startfile(os.path.join(music_dir, songs[0]))
+            if os.path.exists(music_dir):  # ✅ Added path check
+                songs = os.listdir(music_dir)
+                os.startfile(os.path.join(music_dir, songs[0]))
+            else:
+                speak("Music directory not found!")
 
         elif 'the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
@@ -89,19 +90,22 @@ if __name__ == "__main__":
 
         elif 'open code' in query:
             codePath = "C:\\Users\\Haris\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
-            os.startfile(codePath)
-
-
+            if os.path.exists(codePath):  # ✅ Added path check
+                os.startfile(codePath)
+            else:
+                speak("Code editor not found!")
 
         elif 'email to harry' in query:
             try:
                 speak("What should I say?")
                 content = takeCommand()
-                to = "harryyourEmail@gmail.com"
+                to = "harryyourEmail@gmail.com"  # ✅ Ensure this is valid
                 sendEmail(to, content)
                 speak("Email has been sent!")
             except Exception as e:
                 print(e)
-                speak("Sorry my friend harry bhai. I am not able to send this email")
-        else:
-            print("No query matched")
+                speak("Sorry my friend, I am not able to send this email")
+
+        elif 'exit' in query or 'quit' in query:  # ✅ Exit condition added
+            speak("Goodbye, Sir!")
+            break
