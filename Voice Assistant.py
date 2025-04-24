@@ -1,5 +1,3 @@
-
-
 import pyttsx3
 import speech_recognition as sr
 import datetime
@@ -14,6 +12,7 @@ engine.setProperty('voice', voices[0].id)
 
 
 def speak(audio):
+    print(f"Assistant: {audio}")
     engine.say(audio)
     engine.runAndWait()
 
